@@ -61,6 +61,7 @@ namespace Game
             var template = _settings.Figures[Random.Range(minInclusive: 0, _settings.Figures.Length)];
             var figure = Object.Instantiate(template);
             figure.Initialize(_settings);
+            figure.Hide();
             _pooledFigures.Enqueue(figure);
         }
     }
