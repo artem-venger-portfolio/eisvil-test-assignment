@@ -55,6 +55,8 @@ namespace Game
 
         private void CollidedWithOtherFigureEventHandler(Figure figure)
         {
+            figure.Stop();
+            figure.Hide();
         }
 
         private void CreateFigureInPool()
