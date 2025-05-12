@@ -17,7 +17,7 @@ namespace Game
         public void Initialize(float speed)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            SetVelocity(Random.insideUnitCircle * speed);
+            SetVelocity(Random.insideUnitCircle.normalized * speed);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
