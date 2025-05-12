@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -18,6 +21,8 @@ namespace Game
             _pooledFigures = new Queue<Figure>(_settings.FiguresCount);
             _activeFigures = new List<Figure>(_settings.FiguresCount);
         }
+
+        public event Action<FigureType> FigureDestroyed;
 
         public void Start()
         {
