@@ -5,12 +5,12 @@ namespace Game
 {
     public class CollisionRoom
     {
-        private readonly GameObject _coroutineHolder;
+        private readonly MonoBehaviour _coroutineHolder;
         private readonly SettingsSO _settings;
         private readonly Queue<Figure> _pooledFigures;
         private readonly List<Figure> _activeFigures;
 
-        public CollisionRoom(SettingsSO settings, GameObject coroutineHolder)
+        public CollisionRoom(SettingsSO settings, MonoBehaviour coroutineHolder)
         {
             _settings = settings;
             _coroutineHolder = coroutineHolder;

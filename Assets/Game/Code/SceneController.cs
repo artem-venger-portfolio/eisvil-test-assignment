@@ -28,7 +28,7 @@ namespace Game
                 yield return new WaitForSeconds(seconds: 1);
             }
 
-            _collisionRoom = new CollisionRoom(_settings, gameObject);
+            _collisionRoom = new CollisionRoom(_settings, this);
             _collisionRoom.Start();
         }
     }
