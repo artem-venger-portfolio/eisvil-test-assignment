@@ -31,8 +31,8 @@ namespace Game
 
         public void Launch()
         {
-            transform.position = Vector3.zero;
-            SetVelocity(Random.insideUnitCircle.normalized * _settings.FigureSpeed);
+            MoveToDefaultPosition();
+            SetRandomVelocity();
         }
 
         public void Stop()
@@ -45,18 +45,21 @@ namespace Game
             SetActive(isActive: false);
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void SetActive(bool isActive)
         {
-            var otherObject = collision.gameObject;
-            if (otherObject.TryGetComponent<Figure>(out _))
-            {
-                CollidedWithOtherFigure?.Invoke(this);
-            }
-            else if (otherObject.TryGetComponent<Edges>(out _))
-            {
-                var normal = -collision.contacts[0].normal;
-                SetVelocity(Vector2.Reflect(_lastVelocity, normal));
-            }
+            gameObject.SetActive(isActive);
+        }
+
+        private void MoveToDefaultPosition()
+        {
+            transform.position = Vector3.zero;
+        }
+
+        private void SetRandomVelocity()
+        {
+            var randomDirection = Random.insideUnitCircle.normalized;
+            var velocity = randomDirection * _settings.FigureSpeed;
+            SetVelocity(velocity);
         }
 
         private void SetVelocity(Vector2 value)
@@ -65,9 +68,42 @@ namespace Game
             _rigidbody.linearVelocity = _lastVelocity;
         }
 
-        private void SetActive(bool isActive)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            gameObject.SetActive(isActive);
+            if (IsFigure(collision))
+            {
+                HandleFigureCollision();
+            }
+            else if (IsEdge(collision))
+            {
+                HandleEdgeCollision(collision);
+            }
+        }
+
+        private bool IsFigure(Collision2D collision)
+        {
+            return HasComponent<Figure>(collision);
+        }
+
+        private bool HasComponent<T>(Collision2D collision) where T: Component
+        {
+            return collision.gameObject.TryGetComponent<T>(out _);
+        }
+
+        private void HandleFigureCollision()
+        {
+            CollidedWithOtherFigure?.Invoke(this);
+        }
+
+        private bool IsEdge(Collision2D collision)
+        {
+            return HasComponent<Edges>(collision);
+        }
+
+        private void HandleEdgeCollision(Collision2D collision)
+        {
+            var normal = -collision.contacts[0].normal;
+            SetVelocity(Vector2.Reflect(_lastVelocity, normal));
         }
     }
 }
