@@ -18,8 +18,9 @@ namespace Game
         {
             _settings = settings;
             _coroutineHolder = coroutineHolder;
-            _pooledFigures = new Queue<Figure>(RequiredFiguresCount);
-            _activeFigures = new List<Figure>(RequiredFiguresCount);
+            var requiredFiguresCount = _settings.FiguresCount;
+            _pooledFigures = new Queue<Figure>(requiredFiguresCount);
+            _activeFigures = new List<Figure>(requiredFiguresCount);
         }
 
         public event Action<FigureType> FigureDestroyed;
@@ -29,13 +30,11 @@ namespace Game
             _coroutineHolder.StartCoroutine(GetSpawnRoutine());
         }
 
-        private int RequiredFiguresCount => _settings.FiguresCount;
-
         private IEnumerator GetSpawnRoutine()
         {
             while (true)
             {
-                if (_activeFigures.Count == RequiredFiguresCount)
+                if (IsRequiredNumberOfFiguresPresent())
                 {
                     yield return null;
                 }
@@ -46,6 +45,11 @@ namespace Game
                 }
             }
             // ReSharper disable once IteratorNeverReturns
+        }
+
+        private bool IsRequiredNumberOfFiguresPresent()
+        {
+            return _activeFigures.Count == _settings.FiguresCount;
         }
 
         private void SpawnFigure()
