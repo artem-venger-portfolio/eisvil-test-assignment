@@ -41,7 +41,7 @@ namespace Game
 
             DestroyedFiguresCount++;
             Progress = (float)DestroyedFiguresCount / TargetCount;
-            if (Mathf.Approximately(Progress, b: 1))
+            if (IsDone)
             {
                 _collisionRoom.FigureDestroyed -= FigureDestroyedEventHandler;
             }
