@@ -11,13 +11,19 @@ namespace Game
 
         private Vector2 _lastVelocity;
         private Rigidbody2D _rigidbody;
+        private SettingsSO _settings;
 
         public FigureType Type => _type;
 
-        public void Initialize(float speed)
+        public void Initialize(SettingsSO settings)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            SetVelocity(Random.insideUnitCircle.normalized * speed);
+            _settings = settings;
+        }
+
+        public void Launch()
+        {
+            SetVelocity(Random.insideUnitCircle.normalized * _settings.FigureSpeed);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
