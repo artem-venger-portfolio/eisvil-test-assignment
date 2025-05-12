@@ -17,11 +17,12 @@ namespace Game
             var edges = _sceneReferences.Edges;
             edges.Initialize(gameCamera);
 
-            foreach (var currentTemplate in _settings.Figures)
+            for (var i = 0; i < _settings.FiguresCount; i++)
             {
-                var figure = Instantiate(currentTemplate);
+                var template = _settings.Figures[Random.Range(minInclusive: 0, _settings.Figures.Length)];
+                var figure = Instantiate(template);
                 figure.Initialize(_settings.FigureSpeed);
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(seconds: 1);
             }
         }
     }
