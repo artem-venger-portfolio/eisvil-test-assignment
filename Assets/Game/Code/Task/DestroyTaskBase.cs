@@ -16,11 +16,10 @@ namespace Game
 
         public int TargetCount { get; }
 
-        public float Progress { get; private set; }
-
         public abstract string DisplayName { get; }
 
         public event Action CurrentCountChanged;
+
         public event Action Done;
 
         public void StartTracking()
@@ -38,7 +37,6 @@ namespace Game
             }
 
             IncrementCurrentCount();
-            Progress = (float)CurrentCount / TargetCount;
 
             var isDone = CurrentCount == TargetCount;
             if (isDone)
