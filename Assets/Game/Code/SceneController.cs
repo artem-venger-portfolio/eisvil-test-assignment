@@ -13,20 +13,11 @@ namespace Game
 
         private CollisionRoom _collisionRoom;
 
-        private IEnumerator Start()
+        private void Start()
         {
             var gameCamera = _sceneReferences.Camera;
             var edges = _sceneReferences.Edges;
             edges.Initialize(gameCamera);
-
-            for (var i = 0; i < _settings.FiguresCount; i++)
-            {
-                var template = _settings.Figures[Random.Range(minInclusive: 0, _settings.Figures.Length)];
-                var figure = Instantiate(template);
-                figure.Initialize(_settings);
-                figure.Launch();
-                yield return new WaitForSeconds(seconds: 1);
-            }
 
             _collisionRoom = new CollisionRoom(_settings, this);
             _collisionRoom.Start();

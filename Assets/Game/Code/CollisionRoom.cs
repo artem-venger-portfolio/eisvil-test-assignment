@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -20,10 +21,26 @@ namespace Game
 
         public void Start()
         {
+            _coroutineHolder.StartCoroutine(GetSpawnRoutine());
         }
 
-        public void Stop()
+        private IEnumerator GetSpawnRoutine()
         {
+            while (true)
+            {
+                if (_activeFigures.Count == _settings.FiguresCount)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    var template = _settings.Figures[Random.Range(minInclusive: 0, _settings.Figures.Length)];
+                    var figure = Object.Instantiate(template);
+                    figure.Initialize(_settings);
+                    figure.Launch();
+                    yield return new WaitForSeconds(seconds: 1);
+                }
+            }
         }
     }
 }
