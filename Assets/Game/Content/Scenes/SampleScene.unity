@@ -398,6 +398,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2680499080387598429, guid: 3e99fb0d2f06aad48a82a90f964f3ce5, type: 3}
+      propertyPath: _speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6229893497136881515, guid: 3e99fb0d2f06aad48a82a90f964f3ce5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0

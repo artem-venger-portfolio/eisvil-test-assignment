@@ -12,14 +12,27 @@ namespace Game
         [SerializeField]
         private float _speed;
 
+        private Vector2 _lastVelocity;
         private Rigidbody2D _rigidbody;
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            _rigidbody.linearVelocity = Random.insideUnitCircle * _speed;
+            SetVelocity(Random.insideUnitCircle * _speed);
         }
 
         public FigureType Type => _type;
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            var normal = -collision.contacts[0].normal;
+            SetVelocity(Vector2.Reflect(_lastVelocity, normal));
+        }
+
+        private void SetVelocity(Vector2 value)
+        {
+            _lastVelocity = value;
+            _rigidbody.linearVelocity = _lastVelocity;
+        }
     }
 }
