@@ -13,10 +13,15 @@ namespace Game
         [SerializeField]
         private float _figureSpeed;
 
+        [SerializeField]
+        private int _figuresCount;
+
         private const string TYPE_NAME = nameof(SettingsSO);
 
         public Figure[] Figures => _figures;
 
         public float FigureSpeed => _figureSpeed;
+
+        public int FiguresCount => _figuresCount;
     }
 }
