@@ -17,6 +17,8 @@ namespace Game
 
         public float Progress { get; private set; }
 
+        public bool IsDone => _secondsLeft == _targetSeconds;
+
         public string DisplayName => $"Play time ({_secondsLeft}/{_targetSeconds})";
 
         public event Action<float> ProgressChanged;

@@ -16,6 +16,8 @@ namespace Game
 
         public float Progress { get; private set; }
 
+        public bool IsDone => DestroyedFiguresCount == TargetCount;
+
         public abstract string DisplayName { get; }
 
         public event Action<float> ProgressChanged;
