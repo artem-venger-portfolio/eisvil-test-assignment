@@ -6,7 +6,7 @@
         {
         }
 
-        public override string DisplayName => "Destroy any figure";
+        public override string DisplayName => "Destroy any";
 
         protected override bool CanIncrementCounter(FigureType figure)
         {
