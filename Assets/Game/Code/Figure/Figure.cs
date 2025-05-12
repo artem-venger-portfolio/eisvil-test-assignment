@@ -31,6 +31,7 @@ namespace Game
 
         public void Launch()
         {
+            transform.position = Vector3.zero;
             SetVelocity(Random.insideUnitCircle.normalized * _settings.FigureSpeed);
         }
 
