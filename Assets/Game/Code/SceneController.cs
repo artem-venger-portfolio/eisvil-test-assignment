@@ -11,6 +11,8 @@ namespace Game
         [SerializeField]
         private SceneReferences _sceneReferences;
 
+        private CollisionRoom _collisionRoom;
+
         private IEnumerator Start()
         {
             var gameCamera = _sceneReferences.Camera;
@@ -25,6 +27,9 @@ namespace Game
                 figure.Launch();
                 yield return new WaitForSeconds(seconds: 1);
             }
+
+            _collisionRoom = new CollisionRoom(_settings, gameObject);
+            _collisionRoom.Start();
         }
     }
 }
