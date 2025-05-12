@@ -38,6 +38,7 @@ namespace Game
                     yield return new WaitForSeconds(_settings.SpawnInterval);
                 }
             }
+            // ReSharper disable once IteratorNeverReturns
         }
 
         private void SpawnFigure()
