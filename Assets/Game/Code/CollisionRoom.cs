@@ -65,7 +65,8 @@ namespace Game
 
         private void CreateFigureInPool()
         {
-            var template = _settings.Figures[Random.Range(minInclusive: 0, _settings.Figures.Length)];
+            var figures = _settings.Figures;
+            var template = figures[Random.Range(minInclusive: 0, figures.Length)];
             var figure = Object.Instantiate(template);
             figure.Initialize(_settings);
             figure.Hide();
