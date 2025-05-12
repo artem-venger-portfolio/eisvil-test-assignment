@@ -49,7 +49,6 @@ namespace Game
             var otherObject = collision.gameObject;
             if (otherObject.TryGetComponent<Figure>(out _))
             {
-                Destroy(gameObject);
                 CollidedWithOtherFigure?.Invoke(this);
             }
             else if (otherObject.TryGetComponent<Edges>(out _))
