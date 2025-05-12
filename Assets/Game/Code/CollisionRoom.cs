@@ -56,6 +56,7 @@ namespace Game
 
         private void CollidedWithOtherFigureEventHandler(Figure figure)
         {
+            figure.CollidedWithOtherFigure -= CollidedWithOtherFigureEventHandler;
             figure.Stop();
             figure.Hide();
             _activeFigures.Remove(figure);
