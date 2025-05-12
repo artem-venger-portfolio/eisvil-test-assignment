@@ -1,18 +1,19 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
     public class TaskView : MonoBehaviour
     {
         [SerializeField]
-        private RectTransform _fill;
+        private Image _fill;
 
         [SerializeField]
         private TMP_Text _nameField;
 
         private ITask _task;
-        
+
         public void Initialize(ITask task)
         {
             _task = task;
@@ -29,7 +30,12 @@ namespace Game
 
         private void SetProgress(float progress)
         {
-            _fill.anchorMax = new Vector2(progress, 1);
+            var fillRectTransform = (RectTransform)_fill.transform;
+            fillRectTransform.anchorMax = new Vector2(progress, y: 1);
+            if (Mathf.Approximately(progress, b: 1))
+            {
+                _fill.color = Color.softYellow;
+            }
         }
 
         private void SetName(string taskName)
