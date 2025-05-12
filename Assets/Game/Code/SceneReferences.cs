@@ -12,8 +12,13 @@ namespace Game
         [SerializeField]
         private Edges _edges;
 
+        [SerializeField]
+        private HUD _hud;
+
         public Camera Camera => _camera;
 
         public Edges Edges => _edges;
+
+        public HUD HUD => _hud;
     }
 }

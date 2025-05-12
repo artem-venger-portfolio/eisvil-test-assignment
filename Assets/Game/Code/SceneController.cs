@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -20,6 +21,9 @@ namespace Game
 
             _collisionRoom = new CollisionRoom(_settings, this);
             _collisionRoom.Start();
+
+            var tasks = new List<ITask>();
+            _sceneReferences.HUD.Initialize(tasks);
         }
     }
 }
