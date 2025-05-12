@@ -54,11 +54,31 @@ namespace Game
 
         private void SpawnFigure()
         {
-            if (_pooledFigures.Count == 0)
+            if (IsPoolEmpty())
             {
                 CreateFigureInPool();
             }
 
+            ActivateFigureFromPool();
+        }
+
+        private bool IsPoolEmpty()
+        {
+            return _pooledFigures.Count == 0;
+        }
+
+        private void CreateFigureInPool()
+        {
+            var figures = _settings.Figures;
+            var template = figures[Random.Range(minInclusive: 0, figures.Length)];
+            var figure = Object.Instantiate(template);
+            figure.Initialize(_settings);
+            figure.Hide();
+            _pooledFigures.Enqueue(figure);
+        }
+
+        private void ActivateFigureFromPool()
+        {
             var figure = _pooledFigures.Dequeue();
             _activeFigures.Add(figure);
             figure.CollidedWithOtherFigure += CollidedWithOtherFigureEventHandler;
@@ -74,16 +94,6 @@ namespace Game
             _activeFigures.Remove(figure);
             _pooledFigures.Enqueue(figure);
             FigureDestroyed?.Invoke(figure.Type);
-        }
-
-        private void CreateFigureInPool()
-        {
-            var figures = _settings.Figures;
-            var template = figures[Random.Range(minInclusive: 0, figures.Length)];
-            var figure = Object.Instantiate(template);
-            figure.Initialize(_settings);
-            figure.Hide();
-            _pooledFigures.Enqueue(figure);
         }
     }
 }
