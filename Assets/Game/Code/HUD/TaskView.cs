@@ -32,7 +32,7 @@ namespace Game
         {
             var fillRectTransform = (RectTransform)_fill.transform;
             fillRectTransform.anchorMax = new Vector2(progress, y: 1);
-            if (Mathf.Approximately(progress, b: 1))
+            if (_task.IsDone)
             {
                 _fill.color = Color.softYellow;
             }
