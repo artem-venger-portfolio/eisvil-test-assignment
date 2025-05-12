@@ -67,6 +67,7 @@ namespace Game
             figure.Hide();
             _activeFigures.Remove(figure);
             _pooledFigures.Enqueue(figure);
+            FigureDestroyed?.Invoke(figure.Type);
         }
 
         private void CreateFigureInPool()
