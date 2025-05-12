@@ -8,5 +8,6 @@ namespace Game
         public float Progress { get; }
         public bool IsDone { get; }
         public event Action<float> ProgressChanged;
+        void StartTracking();
     }
 }

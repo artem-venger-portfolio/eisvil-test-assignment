@@ -6,13 +6,14 @@ namespace Game
 {
     public class WaitingTask : ITask
     {
+        private readonly MonoBehaviour _coroutineHolder;
         private readonly int _targetSeconds;
         private int _secondsLeft;
 
         public WaitingTask(MonoBehaviour coroutineHolder, int seconds)
         {
+            _coroutineHolder = coroutineHolder;
             _targetSeconds = seconds;
-            coroutineHolder.StartCoroutine(GetWaitRoutine());
         }
 
         public float Progress { get; private set; }
@@ -22,6 +23,11 @@ namespace Game
         public string DisplayName => $"Play time ({_secondsLeft}/{_targetSeconds})";
 
         public event Action<float> ProgressChanged;
+
+        public void StartTracking()
+        {
+            _coroutineHolder.StartCoroutine(GetWaitRoutine());
+        }
 
         private IEnumerator GetWaitRoutine()
         {

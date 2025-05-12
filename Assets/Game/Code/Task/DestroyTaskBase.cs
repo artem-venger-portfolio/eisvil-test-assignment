@@ -11,7 +11,6 @@ namespace Game
         {
             _collisionRoom = collisionRoom;
             TargetCount = targetCount;
-            _collisionRoom.FigureDestroyed += FigureDestroyedEventHandler;
         }
 
         public float Progress { get; private set; }
@@ -21,6 +20,11 @@ namespace Game
         public abstract string DisplayName { get; }
 
         public event Action<float> ProgressChanged;
+
+        public void StartTracking()
+        {
+            _collisionRoom.FigureDestroyed += FigureDestroyedEventHandler;
+        }
 
         protected int TargetCount { get; }
 
