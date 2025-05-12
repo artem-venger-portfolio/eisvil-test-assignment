@@ -12,6 +12,9 @@ namespace Game
 
         private void Start()
         {
+            var gameCamera = _sceneReferences.Camera;
+            var edges = _sceneReferences.Edges;
+            edges.Initialize(gameCamera);
         }
     }
 }
