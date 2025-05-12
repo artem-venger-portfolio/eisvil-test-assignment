@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Game
 {
@@ -13,9 +12,13 @@ namespace Game
             TargetCount = targetCount;
         }
 
+        public int CurrentCount { get; private set; }
+
+        public int TargetCount { get; }
+
         public float Progress { get; private set; }
 
-        public bool IsDone => DestroyedFiguresCount == TargetCount;
+        public bool IsDone => CurrentCount == TargetCount;
 
         public abstract string DisplayName { get; }
 
@@ -26,10 +29,6 @@ namespace Game
             _collisionRoom.FigureDestroyed += FigureDestroyedEventHandler;
         }
 
-        protected int TargetCount { get; }
-
-        protected int DestroyedFiguresCount { get; private set; }
-
         protected abstract bool CanIncrementCounter(FigureType figure);
 
         private void FigureDestroyedEventHandler(FigureType figure)
@@ -39,8 +38,8 @@ namespace Game
                 return;
             }
 
-            DestroyedFiguresCount++;
-            Progress = (float)DestroyedFiguresCount / TargetCount;
+            CurrentCount++;
+            Progress = (float)CurrentCount / TargetCount;
             if (IsDone)
             {
                 _collisionRoom.FigureDestroyed -= FigureDestroyedEventHandler;

@@ -7,20 +7,22 @@ namespace Game
     public class WaitingTask : ITask
     {
         private readonly MonoBehaviour _coroutineHolder;
-        private readonly int _targetSeconds;
-        private int _secondsLeft;
 
         public WaitingTask(MonoBehaviour coroutineHolder, int seconds)
         {
             _coroutineHolder = coroutineHolder;
-            _targetSeconds = seconds;
+            TargetCount = seconds;
         }
+
+        public int CurrentCount { get; private set; }
+
+        public int TargetCount { get; }
 
         public float Progress { get; private set; }
 
-        public bool IsDone => _secondsLeft == _targetSeconds;
+        public bool IsDone => CurrentCount == TargetCount;
 
-        public string DisplayName => $"Play time ({_secondsLeft}/{_targetSeconds})";
+        public string DisplayName => $"Play time ({CurrentCount}/{TargetCount})";
 
         public event Action<float> ProgressChanged;
 
@@ -31,11 +33,11 @@ namespace Game
 
         private IEnumerator GetWaitRoutine()
         {
-            while (_secondsLeft < _targetSeconds)
+            while (CurrentCount < TargetCount)
             {
                 yield return new WaitForSeconds(seconds: 1);
-                _secondsLeft++;
-                Progress = (float)_secondsLeft / _targetSeconds;
+                CurrentCount++;
+                Progress = (float)CurrentCount / TargetCount;
                 ProgressChanged?.Invoke(Progress);
             }
         }
