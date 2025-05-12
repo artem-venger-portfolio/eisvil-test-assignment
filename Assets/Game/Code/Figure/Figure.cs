@@ -22,8 +22,16 @@ namespace Game
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            var normal = -collision.contacts[0].normal;
-            SetVelocity(Vector2.Reflect(_lastVelocity, normal));
+            var otherObject = collision.gameObject;
+            if (otherObject.TryGetComponent<Figure>(out _))
+            {
+                Destroy(gameObject);
+            }
+            else if (otherObject.TryGetComponent<Edges>(out _))
+            {
+                var normal = -collision.contacts[0].normal;
+                SetVelocity(Vector2.Reflect(_lastVelocity, normal));
+            }
         }
 
         private void SetVelocity(Vector2 value)
