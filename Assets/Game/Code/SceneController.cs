@@ -26,6 +26,7 @@ namespace Game
             {
                 new DestroyAnyTask(_collisionRoom, targetCount: 30),
                 new DestroyTask(_collisionRoom, FigureType.Circle, targetCount: 15),
+                new WaitingTask(this, seconds: 120),
             };
             _sceneReferences.HUD.Initialize(tasks);
         }
