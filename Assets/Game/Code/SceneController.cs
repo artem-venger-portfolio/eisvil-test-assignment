@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Game
@@ -10,11 +11,18 @@ namespace Game
         [SerializeField]
         private SceneReferences _sceneReferences;
 
-        private void Start()
+        private IEnumerator Start()
         {
             var gameCamera = _sceneReferences.Camera;
             var edges = _sceneReferences.Edges;
             edges.Initialize(gameCamera);
+
+            foreach (var currentTemplate in _settings.Figures)
+            {
+                var figure = Instantiate(currentTemplate);
+                figure.Initialize(_settings.FigureSpeed);
+                yield return new WaitForSeconds(1);
+            }
         }
     }
 }
