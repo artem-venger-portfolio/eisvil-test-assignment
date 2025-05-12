@@ -24,9 +24,24 @@ namespace Game
             _settings = settings;
         }
 
+        public void Show()
+        {
+            SetActive(isActive: true);
+        }
+
         public void Launch()
         {
             SetVelocity(Random.insideUnitCircle.normalized * _settings.FigureSpeed);
+        }
+
+        public void Stop()
+        {
+            SetVelocity(Vector2.zero);
+        }
+
+        public void Hide()
+        {
+            SetActive(isActive: false);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -48,6 +63,11 @@ namespace Game
         {
             _lastVelocity = value;
             _rigidbody.linearVelocity = _lastVelocity;
+        }
+
+        private void SetActive(bool isActive)
+        {
+            gameObject.SetActive(isActive);
         }
     }
 }
