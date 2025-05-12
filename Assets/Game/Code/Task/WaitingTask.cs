@@ -18,11 +18,10 @@ namespace Game
 
         public int TargetCount { get; }
 
-        public bool IsDone => CurrentCount == TargetCount;
-
         public string DisplayName => "Play seconds";
 
         public event Action CurrentCountChanged;
+        public event Action Done;
 
         public void StartTracking()
         {
@@ -36,6 +35,8 @@ namespace Game
                 yield return new WaitForSeconds(seconds: 1);
                 IncrementCurrentCount();
             }
+
+            Done?.Invoke();
         }
 
         private void IncrementCurrentCount()

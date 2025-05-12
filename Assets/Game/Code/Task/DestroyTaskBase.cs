@@ -18,11 +18,10 @@ namespace Game
 
         public float Progress { get; private set; }
 
-        public bool IsDone => CurrentCount == TargetCount;
-
         public abstract string DisplayName { get; }
 
         public event Action CurrentCountChanged;
+        public event Action Done;
 
         public void StartTracking()
         {
@@ -40,9 +39,12 @@ namespace Game
 
             IncrementCurrentCount();
             Progress = (float)CurrentCount / TargetCount;
-            if (IsDone)
+
+            var isDone = CurrentCount == TargetCount;
+            if (isDone)
             {
                 _collisionRoom.FigureDestroyed -= FigureDestroyedEventHandler;
+                Done?.Invoke();
             }
         }
 

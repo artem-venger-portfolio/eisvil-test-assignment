@@ -18,18 +18,18 @@ namespace Game
         {
             _task = task;
             _task.CurrentCountChanged += CurrentCountChangedEventHandler;
+            _task.Done += DoneEventHandler;
             CurrentCountChangedEventHandler();
         }
 
         private void UpdateProgress()
         {
-            var progress = (float)_task.CurrentCount / _task.TargetCount;
+            var currentCount = _task.CurrentCount;
+            var taskTargetCount = _task.TargetCount;
+            var progress = (float)currentCount / taskTargetCount;
+
             var fillRectTransform = (RectTransform)_fill.transform;
             fillRectTransform.anchorMax = new Vector2(progress, y: 1);
-            if (_task.IsDone)
-            {
-                _fill.color = Color.softYellow;
-            }
         }
 
         private void UpdateName()
@@ -41,6 +41,11 @@ namespace Game
         {
             UpdateProgress();
             UpdateName();
+        }
+
+        private void DoneEventHandler()
+        {
+            _fill.color = Color.softYellow;
         }
     }
 }
