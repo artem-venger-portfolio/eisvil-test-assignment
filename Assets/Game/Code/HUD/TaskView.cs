@@ -18,14 +18,14 @@ namespace Game
         {
             _task = task;
             SetProgress(_task.Progress);
-            SetName(_task.DisplayName);
+            SetName(_task);
             _task.ProgressChanged += ProgressChangedEventHandler;
         }
 
         private void ProgressChangedEventHandler(float progress)
         {
             SetProgress(progress);
-            SetName(_task.DisplayName);
+            SetName(_task);
         }
 
         private void SetProgress(float progress)
@@ -38,9 +38,9 @@ namespace Game
             }
         }
 
-        private void SetName(string taskName)
+        private void SetName(ITask task)
         {
-            _nameField.text = taskName;
+            _nameField.text = $"{task.DisplayName} ({task.CurrentCount}/{task.TargetCount})";
         }
     }
 }

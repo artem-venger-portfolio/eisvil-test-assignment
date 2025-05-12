@@ -10,8 +10,7 @@
             _targetFigure = targetFigure;
         }
 
-        public override string DisplayName => $"{_targetFigure.ToString()} destroyed " +
-                                              $"({CurrentCount}/{TargetCount})";
+        public override string DisplayName => $"Destroy {_targetFigure.ToString()}";
 
         protected override bool CanIncrementCounter(FigureType figure)
         {

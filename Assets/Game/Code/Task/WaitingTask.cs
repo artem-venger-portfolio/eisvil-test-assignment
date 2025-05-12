@@ -22,7 +22,7 @@ namespace Game
 
         public bool IsDone => CurrentCount == TargetCount;
 
-        public string DisplayName => $"Play time ({CurrentCount}/{TargetCount})";
+        public string DisplayName => "Play seconds";
 
         public event Action<float> ProgressChanged;
 

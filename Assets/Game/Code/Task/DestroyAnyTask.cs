@@ -6,7 +6,7 @@
         {
         }
 
-        public override string DisplayName => $"Any object destroyed ({CurrentCount}/{TargetCount})";
+        public override string DisplayName => "Destroy any figure";
 
         protected override bool CanIncrementCounter(FigureType figure)
         {
