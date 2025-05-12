@@ -34,13 +34,34 @@ namespace Game
                 }
                 else
                 {
-                    var template = _settings.Figures[Random.Range(minInclusive: 0, _settings.Figures.Length)];
-                    var figure = Object.Instantiate(template);
-                    figure.Initialize(_settings);
-                    figure.Launch();
+                    SpawnFigure();
                     yield return new WaitForSeconds(seconds: 1);
                 }
             }
+        }
+
+        private void SpawnFigure()
+        {
+            if (_pooledFigures.Count == 0)
+            {
+                CreateFigureInPool();
+            }
+
+            var figure = _pooledFigures.Dequeue();
+            figure.CollidedWithOtherFigure += CollidedWithOtherFigureEventHandler;
+            figure.Launch();
+        }
+
+        private void CollidedWithOtherFigureEventHandler(Figure figure)
+        {
+        }
+
+        private void CreateFigureInPool()
+        {
+            var template = _settings.Figures[Random.Range(minInclusive: 0, _settings.Figures.Length)];
+            var figure = Object.Instantiate(template);
+            figure.Initialize(_settings);
+            _pooledFigures.Enqueue(figure);
         }
     }
 }
