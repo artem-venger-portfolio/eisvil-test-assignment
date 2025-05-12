@@ -17,13 +17,24 @@ namespace Game
         {
             _task = task;
             SetProgress(_task.Progress);
-            _task.ProgressChanged += SetProgress;
-            _nameField.text = _task.DisplayName;
+            SetName(_task.DisplayName);
+            _task.ProgressChanged += ProgressChangedEventHandler;
+        }
+
+        private void ProgressChangedEventHandler(float progress)
+        {
+            SetProgress(progress);
+            SetName(_task.DisplayName);
         }
 
         private void SetProgress(float progress)
         {
             _fill.anchorMax = new Vector2(progress, 1);
+        }
+
+        private void SetName(string taskName)
+        {
+            _nameField.text = taskName;
         }
     }
 }
