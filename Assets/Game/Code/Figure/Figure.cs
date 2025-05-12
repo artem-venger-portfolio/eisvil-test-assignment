@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Game
@@ -14,6 +15,8 @@ namespace Game
         private SettingsSO _settings;
 
         public FigureType Type => _type;
+
+        public event Action<Figure> CollidedWithOtherFigure;
 
         public void Initialize(SettingsSO settings)
         {
@@ -32,6 +35,7 @@ namespace Game
             if (otherObject.TryGetComponent<Figure>(out _))
             {
                 Destroy(gameObject);
+                CollidedWithOtherFigure?.Invoke(this);
             }
             else if (otherObject.TryGetComponent<Edges>(out _))
             {
