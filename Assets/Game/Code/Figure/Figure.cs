@@ -9,19 +9,16 @@ namespace Game
         [SerializeField]
         private FigureType _type;
 
-        [SerializeField]
-        private float _speed;
-
         private Vector2 _lastVelocity;
         private Rigidbody2D _rigidbody;
 
-        private void Awake()
+        public FigureType Type => _type;
+
+        public void Initialize(float speed)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            SetVelocity(Random.insideUnitCircle * _speed);
+            SetVelocity(Random.insideUnitCircle * speed);
         }
-
-        public FigureType Type => _type;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
