@@ -22,7 +22,10 @@ namespace Game
             _collisionRoom = new CollisionRoom(_settings, this);
             _collisionRoom.Start();
 
-            var tasks = new List<ITask>();
+            var tasks = new List<ITask>
+            {
+                new DestroyAnyTask(_collisionRoom, targetCount: 30),
+            };
             _sceneReferences.HUD.Initialize(tasks);
         }
     }
