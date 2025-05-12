@@ -17,13 +17,13 @@ namespace Game
         public void Initialize(ITask task)
         {
             _task = task;
-            SetProgress(_task.Progress);
-            SetName(_task);
             _task.CurrentCountChanged += CurrentCountChangedEventHandler;
+            CurrentCountChangedEventHandler();
         }
 
-        private void SetProgress(float progress)
+        private void UpdateProgress()
         {
+            var progress = (float)_task.CurrentCount / _task.TargetCount;
             var fillRectTransform = (RectTransform)_fill.transform;
             fillRectTransform.anchorMax = new Vector2(progress, y: 1);
             if (_task.IsDone)
@@ -32,15 +32,15 @@ namespace Game
             }
         }
 
-        private void SetName(ITask task)
+        private void UpdateName()
         {
-            _nameField.text = $"{task.DisplayName} ({task.CurrentCount}/{task.TargetCount})";
+            _nameField.text = $"{_task.DisplayName} ({_task.CurrentCount}/{_task.TargetCount})";
         }
 
         private void CurrentCountChangedEventHandler()
         {
-            SetProgress(_task.Progress);
-            SetName(_task);
+            UpdateProgress();
+            UpdateName();
         }
     }
 }
