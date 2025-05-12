@@ -49,6 +49,7 @@ namespace Game
 
             var figure = _pooledFigures.Dequeue();
             figure.CollidedWithOtherFigure += CollidedWithOtherFigureEventHandler;
+            figure.Show();
             figure.Launch();
         }
 
