@@ -16,6 +16,9 @@ namespace Game
         [SerializeField]
         private int _figuresCount;
 
+        [SerializeField]
+        private float _spawnInterval;
+
         private const string TYPE_NAME = nameof(SettingsSO);
 
         public Figure[] Figures => _figures;
@@ -23,5 +26,7 @@ namespace Game
         public float FigureSpeed => _figureSpeed;
 
         public int FiguresCount => _figuresCount;
+
+        public float SpawnInterval => _spawnInterval;
     }
 }

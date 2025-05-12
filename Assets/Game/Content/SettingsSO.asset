@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 1541941592262149512, guid: 773861f4eff227a488549c72433e0b4e, type: 3}
   _figureSpeed: 10
   _figuresCount: 20
+  _spawnInterval: 0.5

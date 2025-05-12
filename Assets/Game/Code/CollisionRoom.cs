@@ -35,7 +35,7 @@ namespace Game
                 else
                 {
                     SpawnFigure();
-                    yield return new WaitForSeconds(seconds: 1);
+                    yield return new WaitForSeconds(_settings.SpawnInterval);
                 }
             }
         }
