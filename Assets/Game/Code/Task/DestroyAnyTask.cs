@@ -18,7 +18,7 @@ namespace Game
 
         public float Progress { get; private set; }
 
-        public string DisplayName => "Any object destroyed";
+        public string DisplayName => $"Any object destroyed ({_destroyedFiguresCount}/{_targetCount})";
 
         public event Action<float> ProgressChanged;
 
