@@ -13,19 +13,13 @@ namespace Game
         private float _speed;
 
         private Rigidbody2D _rigidbody;
-        private Vector2 _direction;
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            _direction = Random.insideUnitCircle;
+            _rigidbody.linearVelocity = Random.insideUnitCircle * _speed;
         }
 
         public FigureType Type => _type;
-
-        private void FixedUpdate()
-        {
-            _rigidbody.linearVelocity = _direction * _speed;
-        }
     }
 }
