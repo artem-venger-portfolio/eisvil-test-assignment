@@ -25,6 +25,7 @@ namespace Game
         public string DisplayName => "Play seconds";
 
         public event Action<float> ProgressChanged;
+        public event Action CurrentCountChanged;
 
         public void StartTracking()
         {
@@ -36,10 +37,16 @@ namespace Game
             while (CurrentCount < TargetCount)
             {
                 yield return new WaitForSeconds(seconds: 1);
-                CurrentCount++;
+                IncrementCurrentCount();
                 Progress = (float)CurrentCount / TargetCount;
                 ProgressChanged?.Invoke(Progress);
             }
+        }
+
+        private void IncrementCurrentCount()
+        {
+            CurrentCount++;
+            CurrentCountChanged?.Invoke();
         }
     }
 }
