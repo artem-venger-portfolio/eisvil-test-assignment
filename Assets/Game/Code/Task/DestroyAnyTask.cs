@@ -24,6 +24,7 @@ namespace Game
 
         private void FigureDestroyedEventHandler(FigureType figure)
         {
+            _destroyedFiguresCount++;
             Progress = (float)_destroyedFiguresCount / _targetCount;
             if (Mathf.Approximately(Progress, b: 1))
             {
