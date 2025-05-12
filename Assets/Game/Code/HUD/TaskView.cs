@@ -22,6 +22,12 @@ namespace Game
             CurrentCountChangedEventHandler();
         }
 
+        private void CurrentCountChangedEventHandler()
+        {
+            UpdateProgress();
+            UpdateName();
+        }
+
         private void UpdateProgress()
         {
             var currentCount = _task.CurrentCount;
@@ -35,12 +41,6 @@ namespace Game
         private void UpdateName()
         {
             _nameField.text = $"{_task.DisplayName} ({_task.CurrentCount}/{_task.TargetCount})";
-        }
-
-        private void CurrentCountChangedEventHandler()
-        {
-            UpdateProgress();
-            UpdateName();
         }
 
         private void DoneEventHandler()
