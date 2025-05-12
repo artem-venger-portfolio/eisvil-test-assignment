@@ -16,6 +16,11 @@ namespace Game
         public void Initialize(IList<ITask> tasks)
         {
             _tasks = tasks;
+            foreach (var currentTask in _tasks)
+            {
+                var taskView = Instantiate(_taskTemplate, _taskContainer);
+                taskView.Initialize(currentTask);
+            }
         }
     }
 }
