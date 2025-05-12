@@ -28,6 +28,10 @@ namespace Game
                 new DestroyTask(_collisionRoom, FigureType.Circle, targetCount: 10),
                 new WaitingTask(this, seconds: 120),
             };
+            foreach (var currentTask in tasks)
+            {
+                currentTask.StartTracking();
+            }
             _sceneReferences.HUD.Initialize(tasks);
         }
     }
