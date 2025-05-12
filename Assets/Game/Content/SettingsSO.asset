@@ -15,3 +15,4 @@ MonoBehaviour:
   _figures:
   - {fileID: 2680499080387598429, guid: 3e99fb0d2f06aad48a82a90f964f3ce5, type: 3}
   - {fileID: 1541941592262149512, guid: 773861f4eff227a488549c72433e0b4e, type: 3}
+  _figureSpeed: 10
