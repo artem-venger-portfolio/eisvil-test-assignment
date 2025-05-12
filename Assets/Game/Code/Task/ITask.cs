@@ -7,9 +7,7 @@ namespace Game
         public string DisplayName { get; }
         public int CurrentCount { get; }
         public int TargetCount { get; }
-        public float Progress { get; }
         public bool IsDone { get; }
-        public event Action<float> ProgressChanged;
         public event Action CurrentCountChanged;
         void StartTracking();
     }

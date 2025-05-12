@@ -22,8 +22,6 @@ namespace Game
 
         public abstract string DisplayName { get; }
 
-        public event Action<float> ProgressChanged;
-
         public event Action CurrentCountChanged;
 
         public void StartTracking()
@@ -46,7 +44,6 @@ namespace Game
             {
                 _collisionRoom.FigureDestroyed -= FigureDestroyedEventHandler;
             }
-            ProgressChanged?.Invoke(Progress);
         }
 
         private void IncrementCurrentCount()

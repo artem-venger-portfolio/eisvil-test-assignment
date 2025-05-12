@@ -18,13 +18,10 @@ namespace Game
 
         public int TargetCount { get; }
 
-        public float Progress { get; private set; }
-
         public bool IsDone => CurrentCount == TargetCount;
 
         public string DisplayName => "Play seconds";
 
-        public event Action<float> ProgressChanged;
         public event Action CurrentCountChanged;
 
         public void StartTracking()
@@ -38,8 +35,6 @@ namespace Game
             {
                 yield return new WaitForSeconds(seconds: 1);
                 IncrementCurrentCount();
-                Progress = (float)CurrentCount / TargetCount;
-                ProgressChanged?.Invoke(Progress);
             }
         }
 
