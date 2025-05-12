@@ -18,8 +18,8 @@ namespace Game
         {
             _settings = settings;
             _coroutineHolder = coroutineHolder;
-            _pooledFigures = new Queue<Figure>(_settings.FiguresCount);
-            _activeFigures = new List<Figure>(_settings.FiguresCount);
+            _pooledFigures = new Queue<Figure>(RequiredFiguresCount);
+            _activeFigures = new List<Figure>(RequiredFiguresCount);
         }
 
         public event Action<FigureType> FigureDestroyed;
@@ -29,11 +29,13 @@ namespace Game
             _coroutineHolder.StartCoroutine(GetSpawnRoutine());
         }
 
+        private int RequiredFiguresCount => _settings.FiguresCount;
+
         private IEnumerator GetSpawnRoutine()
         {
             while (true)
             {
-                if (_activeFigures.Count == _settings.FiguresCount)
+                if (_activeFigures.Count == RequiredFiguresCount)
                 {
                     yield return null;
                 }
